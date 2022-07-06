@@ -69,7 +69,7 @@ todoRoutes.route('/add').post(function(req, res) {
 });
 
 app.use('/todos', todoRoutes);
-
-app.listen(PORT, function() {
-    console.log("Server is running on Port: " + PORT);
+const portenv = process.env.PORT || 4000
+app.listen(portenv, function() {
+    console.log("Server is running on portenv: " + portenv);
 });
