@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app
+  labels:
+    app: frontend-app
+spec:
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+    spec:
+      containers:
+      - name: frontend-app
+        image: detahermana/frontend-app-stage:1.0
+        resources:
+          requests:
+            cpu: "100m"
+            memory: 100m
+          limits:
+            cpu: 1024m
+            memory: 2048M
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-app
+  labels:
+    app: backend-app
+spec:
+  selector:
+    matchLabels:
+      app: backend-app
+  template:
+    metadata:
+      labels:
+        app: backend-app
+    spec:
+      containers:
+      - name: backend-app
+        image: addekrisna/testbackend:1.0
+        env:
+        - name: SERVER
+          value: "mongodb://admin:danmerasahina@172.20.43.224:27017/todos"
+        - name: PORT
+          value: "4000"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: 100m
+          limits:
+            cpu: 1024m
+            memory: 2048M
